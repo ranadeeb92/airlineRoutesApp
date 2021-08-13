@@ -13,7 +13,7 @@ const App = () => {
       <p>
         Welcome to the app!
       </p>
-      <Table/>
+      <Table className="routes-table"/>
     </section>
   </div>
   ) 
