@@ -26,6 +26,32 @@ function getRows(airlineFilter, airportFilter) {
   })
 }
 
+function getMapRoutes(airlineFilter, airportFilter) {
+  const getAirportLatAndLong = (airport) => {
+    return {
+      lat: airport.lat,
+      long: airport.long
+    }
+  }
+
+  let filteredRoutes = routes;
+  if(airlineFilter !== "all") {
+    filteredRoutes = filteredRoutes.filter(route =>route.airline === Number(airlineFilter))
+  }
+  if(airportFilter !== "all") {
+    filteredRoutes = filteredRoutes.filter(route => route.src === airportFilter || route.dest === airportFilter)
+  }
+  return filteredRoutes.map(route => {
+    return {
+      airline: route.airline,
+      src: getAirportLatAndLong(getAirportByCode(route.src)),
+      dest: getAirportLatAndLong(getAirportByCode(route.dest))
+      }
+  })
+}
+
+
+
 function getAirlines(filter) {
   let airlineIds = new Set();
 
@@ -65,4 +91,4 @@ function getAirports(filter) {
   })
 }
 
-export { getRows, getAirlines, getAirports}
+export { getRows, getAirlines, getAirports, getMapRoutes}

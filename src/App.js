@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import SelectBox from './components/SelectBox';
 import Table from './components/Table';
+import Map from './components/Map';
 import {getAirlines, getAirports} from './utilities'
 
 const App = () => {
@@ -22,9 +23,7 @@ const App = () => {
       <h1 className="title">Airline Routes</h1>
     </header>
     <section>
-      <p>
-        Welcome to the app!
-      </p>
+      <Map airlineFilter={airlineFilter} airportFilter={airportFilter}/>
       <SelectBox options={airlineOptions} value={airlineFilter} defaultOption="All Airlines" label="Show routes on " onSelect={setAirlineFilter}/>
       <SelectBox options={airportOptions} value={airportFilter} defaultOption="All Airports" label="flying in or out of " onSelect={setAirportFilter}/>
       <button onClick={reset}>Show All Routes</button>
