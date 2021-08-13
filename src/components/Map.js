@@ -5,6 +5,7 @@ const Map = ({airlineFilter, airportFilter, onSelect}) => {
   let mapRoutes = getMapRoutes(airlineFilter, airportFilter);
   
   return (
+    <div>
       <svg className="map" viewBox="-180 -90 360 180">
         <g transform="scale(1 -1)">
           <image xlinkHref="equirectangular_world.jpg" href="equirectangular_world.jpg" x="-180" y="-90" height="100%" width="100%" transform="scale(1 -1)"/>
@@ -21,7 +22,8 @@ const Map = ({airlineFilter, airportFilter, onSelect}) => {
             </g>
           })}
         </g>  
-    </svg>
+      </svg>
+    </div>
   );
 }
 

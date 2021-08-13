@@ -1,6 +1,7 @@
 import React from 'react';
 
 const SelectBox = ({options, defaultOption, label, onSelect, value}) => {
+  
   const displayedOptions = options.map(({key, value, active}) => {
     return <option key={key} value={key} disabled={!active}>{value}</option>
   });

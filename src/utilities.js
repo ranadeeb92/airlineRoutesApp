@@ -89,7 +89,19 @@ function getAirports(filter) {
       value: airport.name,
       active: filter === "all" || airportCodes.has(airport.code)
     }
-  })
+  }).sort(sortByName)
+}
+
+function sortByName(a, b) {
+  var nameA = a.value.toUpperCase(); 
+  var nameB = b.value.toUpperCase();
+  if (nameA < nameB) {
+    return -1;
+  }
+  if (nameA > nameB) {
+    return 1;
+  }
+  return 0;
 }
 
 export { getRows, getAirlines, getAirports, getMapRoutes}
