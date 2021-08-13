@@ -26,4 +26,22 @@ function getRows(airlineFilter, airportFilter) {
   })
 }
 
-export { getRows}
+function getAirlines() {
+  return airlines.map(airline => {
+    return {
+      key: airline.id,
+      value: airline.name
+    }
+  })
+}
+
+function getAirports() {
+  return airports.map(airport => {
+    return {
+      key: airport.code,
+      value: airport.name
+    }
+  })
+}
+
+export { getRows, getAirlines, getAirports}
