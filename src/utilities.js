@@ -29,6 +29,7 @@ function getRows(airlineFilter, airportFilter) {
 function getMapRoutes(airlineFilter, airportFilter) {
   const getAirportLatAndLong = (airport) => {
     return {
+      code: airport.code,
       lat: airport.lat,
       long: airport.long
     }
