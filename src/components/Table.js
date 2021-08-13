@@ -3,11 +3,11 @@ import { getRows } from '../utilities';
 
 const perPage = 25;
 
-const Table = ({className}) => {
+const Table = ({className, airlineFilter, airportFilter}) => {
   const [pageNumber, setPageNumber] = useState(0);
   const start = pageNumber * perPage;
   const end = start + perPage;
-  const rows = getRows();
+  const rows = getRows(airlineFilter, airportFilter);
 
   const columnHeaders = ["Airline", "Source Airport", "Destination Airport"];
   
@@ -41,7 +41,7 @@ const Table = ({className}) => {
           {displayedRows}
         </tbody>
       </table>
-      <p>Showing {start + 1} - {end} of {rows.length}</p>
+      <p>Showing {start + 1} - {start + displayedRows.length} of {rows.length}</p>
 
       <button onClick={prePage} disabled={pageNumber === 0}>Previouse Page</button>&nbsp;
       <button onClick={nextPage} disabled={end >= rows.length}>Next Page</button>
