@@ -1,12 +1,15 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import SelectBox from './components/SelectBox';
 import Table from './components/Table';
 import {getAirlines, getAirports} from './utilities'
 
 const App = () => {
-  const airlineOptions = getAirlines();
-  const airportOptions = getAirports();
+  const [airlineFilter, setAirlineFilter] = useState("all");
+  const [airportFilter, setAirportFilter] = useState("all");
+
+  const airlineOptions = getAirlines(airportFilter);
+  const airportOptions = getAirports(airlineFilter);
 
   return (
     <div className="app">
@@ -17,9 +20,9 @@ const App = () => {
       <p>
         Welcome to the app!
       </p>
-      <SelectBox options={airlineOptions} defaultOption="All Airlines" label="Show routes on "/>
-      <SelectBox options={airportOptions} defaultOption="All Airports" label="flying in or out of "/>
-      <Table className="routes-table"/>
+      <SelectBox options={airlineOptions} value={airlineFilter} defaultOption="All Airlines" label="Show routes on " onSelect={setAirlineFilter}/>
+      <SelectBox options={airportOptions} value={airportFilter} defaultOption="All Airports" label="flying in or out of " onSelect={setAirportFilter}/>
+      <Table className="routes-table" airlineFilter={airlineFilter} airportFilter={airportFilter}/>
     </section>
   </div>
   ) 

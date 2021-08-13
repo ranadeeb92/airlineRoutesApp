@@ -11,10 +11,10 @@ function getAirportByCode(code) {
 
 function getRows(airlineFilter, airportFilter) {
   let filteredRoutes = routes;
-  if(airlineFilter) {
-    filteredRoutes = filteredRoutes.filter(route => route.airline === airlineFilter)
+  if(airlineFilter !== "all") {
+    filteredRoutes = filteredRoutes.filter(route =>route.airline === Number(airlineFilter))
   }
-  if(airportFilter) {
+  if(airportFilter !== "all") {
     filteredRoutes = filteredRoutes.filter(route => route.src === airportFilter || route.dest === airportFilter)
   }
   return filteredRoutes.map(route => {
@@ -26,20 +26,41 @@ function getRows(airlineFilter, airportFilter) {
   })
 }
 
-function getAirlines() {
+function getAirlines(filter) {
+  let airlineIds = new Set();
+
+  if(filter !== "all") {
+    routes.forEach(route => {
+      if(route.src === filter || route.dest === filter) {
+        airlineIds.add(route.airline)
+      }
+    });
+
+  }
   return airlines.map(airline => {
     return {
       key: airline.id,
-      value: airline.name
+      value: airline.name,
+      active : filter === "all" || airlineIds.has(airline.id) 
     }
   })
 }
 
-function getAirports() {
+function getAirports(filter) {
+  let airportCodes = new Set();
+  if(filter !== "all") {
+    routes.forEach(route => {
+      if(route.airline === Number(filter)) {
+        airportCodes.add(route.src)
+        airportCodes.add(route.dest)
+      }
+    })
+  }
   return airports.map(airport => {
     return {
       key: airport.code,
-      value: airport.name
+      value: airport.name,
+      active: filter === "all" || airportCodes.has(airport.code)
     }
   })
 }

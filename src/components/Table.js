@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { getRows } from '../utilities';
 
 const perPage = 25;
@@ -11,6 +11,9 @@ const Table = ({className, airlineFilter, airportFilter}) => {
 
   const columnHeaders = ["Airline", "Source Airport", "Destination Airport"];
   
+  useEffect(() => {
+    setPageNumber(0)
+  }, [airlineFilter, airportFilter])
   
   const displayedRows = rows.slice(start, end).map(row => {
     return <tr key={Object.values(row).join(":")}>
