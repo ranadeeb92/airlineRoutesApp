@@ -11,6 +11,11 @@ const App = () => {
   const airlineOptions = getAirlines(airportFilter);
   const airportOptions = getAirports(airlineFilter);
 
+  const reset = () => {
+    setAirportFilter("all");
+    setAirlineFilter('all');
+  }
+
   return (
     <div className="app">
     <header className="header">
@@ -22,6 +27,7 @@ const App = () => {
       </p>
       <SelectBox options={airlineOptions} value={airlineFilter} defaultOption="All Airlines" label="Show routes on " onSelect={setAirlineFilter}/>
       <SelectBox options={airportOptions} value={airportFilter} defaultOption="All Airports" label="flying in or out of " onSelect={setAirportFilter}/>
+      <button onClick={reset}>Show All Routes</button>
       <Table className="routes-table" airlineFilter={airlineFilter} airportFilter={airportFilter}/>
     </section>
   </div>
